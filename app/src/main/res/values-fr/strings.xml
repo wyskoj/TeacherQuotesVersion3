@@ -3,6 +3,9 @@
     <string name="app_name">Teacher Quotes</string>
     <string name="quote_text">Citation</string>
     <string name="help">Aidez-moi</string>
-    <string name="date_of_quote">Jour de citation</string>
+    <string name="date_of_quote">Jour de citation:</string>
     <string name="tap_to_set">Appuyez pour fixer</string>
+    <string name="action_done">Fini</string>
+    <string name="teacher_import_help">Pour commencer, entrez vos professeurs que vous pouvez citer en les entrant ci-dessous.</string>
+    <string name="teacher_import_hint">Entrez les noms des professeurs sur les nouvelles lignes</string>
 </resources>

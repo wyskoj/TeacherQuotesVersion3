@@ -2,14 +2,13 @@ package com.jacobwysko.teacherquotesversion3;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 import com.github.paolorotolo.appintro.AppIntro2;
 import com.github.paolorotolo.appintro.AppIntroFragment;
 
-public class WelcomeActivity extends AppIntro2 {
+public class WelcomeActivity extends AppIntro2{
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -17,6 +16,8 @@ public class WelcomeActivity extends AppIntro2 {
 
         setZoomAnimation();
         showSkipButton(false);
+
+        setWizardMode(true);
 
         addSlide(AppIntroFragment.newInstance("Teacher Quotes", "Quote your favorite teachers on what they say", R.drawable.noback, getResources().getColor(R.color.primaryDarkColor)));
         addSlide(AppIntroFragment.newInstance("Advanced Tools", "Advanced tools for bulk quoting and complex quotations", R.drawable.baseline_tune_white_48, getResources().getColor(R.color.primaryAccent)));
@@ -30,7 +31,11 @@ public class WelcomeActivity extends AppIntro2 {
         super.onDonePressed(currentFragment);
         Intent myIntent = new Intent(WelcomeActivity.this, ImportTeachersActivity.class);
         WelcomeActivity.this.startActivity(myIntent);
+        finish();
+    }
 
-
+    @Override
+    public void onBackPressed(){
+        // Do nothing. (Prevents from going back to main screen)
     }
 }
