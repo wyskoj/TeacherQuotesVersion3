@@ -8,4 +8,6 @@
     <string name="action_done">Fini</string>
     <string name="teacher_import_help">Pour commencer, entrez vos professeurs que vous pouvez citer en les entrant ci-dessous.</string>
     <string name="teacher_import_hint">Entrez les noms des professeurs sur les nouvelles lignes</string>
+    <string name="sort_alphabetically">Trier par ordre alphabétique lorsqu\'il est confirmé</string>
+    <string name="teacher_guidelines">Directives:\n- Nom de famille seulement (par exemple Smith)\n- Exclure M. / Mme. (exception où plusieurs professeurs du même nom et du même genre)</string>
 </resources>

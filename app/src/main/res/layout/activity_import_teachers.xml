@@ -40,7 +40,7 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="Guidelines:\n - Last name only (e.g. Smith)\n - Exclude Mr./Mrs. (exception where multiple teachers of same last name and different gender)"
+                android:text="@string/teacher_guidelines"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -52,7 +52,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="Sort alphabetically on confirm"
+                android:text="@string/sort_alphabetically"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
