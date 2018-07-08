@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Citas Del Profesor</string>
+    <string name="quote_text">Cita</string>
+    <string name="help">Ayuadame</string>
+    <string name="date_of_quote">Fecha de la cita:</string>
+    <string name="tap_to_set">Toque para establecer</string>
+    <string name="action_done">Listo</string>
+    <string name="teacher_import_help">Para comenzar, escribe a los profesores a los que quieras citar a continuación.</string>
+    <string name="teacher_import_hint">Escriba el nombre de cada maestro en su propia línea.</string>
+    <string name="sort_alphabetically">Ordene la lista alfabéticamente</string>
+    <string name="teacher_guidelines">Reglas:\n- Solo usa el apellido (por ejemplo, Garcia)\n- Excluya al Sr. / Sra. (a menos que haya varios maestros con el mismo apellido y diferentes géneros)</string>
+</resources>
