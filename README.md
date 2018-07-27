@@ -3,6 +3,7 @@
 ## Features
 - Introduction Screen
 - Teacher List Screen
+- Basic Quoting Screen
 - TBD
 
 ## Supported Platforms
