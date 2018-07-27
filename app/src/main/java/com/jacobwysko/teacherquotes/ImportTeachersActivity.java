@@ -1,4 +1,4 @@
-package com.jacobwysko.teacherquotesversion3;
+package com.jacobwysko.teacherquotes;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -9,7 +9,13 @@ import android.view.MenuItem;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 
 public class ImportTeachersActivity extends AppCompatActivity {
@@ -18,7 +24,35 @@ public class ImportTeachersActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_import_teachers);
+
+        BufferedReader input;
+        File file;
+        String teacherList = null;
+                   try {
+                file = new File(getFilesDir(), "teacherList");
+                input = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+                teacherList = input.readLine();
+                EditText teacherET = findViewById(R.id.teacherListEditText);
+
+                String[] teachersSep = teacherList.split(",");
+                StringBuilder stringBuilder = null;
+                for (int i = 0; i < teachersSep.length; i++){
+                    if (i == 0){
+                        stringBuilder = new StringBuilder(teachersSep[i]);
+                    } else {
+                        stringBuilder.append("\n").append(teachersSep[i]);
+                    }
+                }
+                teacherET.setText(stringBuilder);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (Exception ignored){
+
+        }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

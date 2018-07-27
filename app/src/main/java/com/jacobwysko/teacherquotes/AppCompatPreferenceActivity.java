@@ -1,4 +1,4 @@
-package com.jacobwysko.teacherquotesversion3;
+package com.jacobwysko.teacherquotes;
 
 import android.content.res.Configuration;
 import android.os.Bundle;

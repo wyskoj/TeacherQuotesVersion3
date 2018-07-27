@@ -1,4 +1,4 @@
-package com.jacobwysko.teacherquotesversion3;
+package com.jacobwysko.teacherquotes;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,8 +8,16 @@ import android.support.v4.app.Fragment;
 import com.github.paolorotolo.appintro.AppIntro2;
 import com.github.paolorotolo.appintro.AppIntroFragment;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 public class WelcomeActivity extends AppIntro2{
 
+    @SuppressWarnings("deprecation")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,13 +37,36 @@ public class WelcomeActivity extends AppIntro2{
     @Override
     public void onDonePressed(Fragment currentFragment) {
         super.onDonePressed(currentFragment);
-        Intent myIntent = new Intent(WelcomeActivity.this, ImportTeachersActivity.class);
-        WelcomeActivity.this.startActivity(myIntent);
+
+        BufferedReader input;
+        File file;
+        String readData = null;
+        try {
+            file = new File(getFilesDir(), "teacherList");
+            input = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+            readData = input.readLine();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception ignored){}
+        try {
+            if ("".equals(readData) || readData == null) {
+                startTeacherImport();
+            }
+        } catch (Exception e){
+            startTeacherImport();
+        }
         finish();
     }
 
     @Override
     public void onBackPressed(){
         // Do nothing. (Prevents from going back to main screen)
+    }
+
+    private void startTeacherImport(){
+        Intent myIntent = new Intent(WelcomeActivity.this, ImportTeachersActivity.class);
+        WelcomeActivity.this.startActivity(myIntent);
     }
 }

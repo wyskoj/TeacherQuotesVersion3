@@ -3,13 +3,13 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.jacobwysko.teacherquotesversion3"
+        applicationId "com.jacobwysko.teacherquotes"
         minSdkVersion 15
         targetSdkVersion 27
-        versionCode 1
-        versionName '0.01a'
+        versionName '3.0.0.1a'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+        versionCode 21
     }
     buildTypes {
         release {
@@ -18,6 +18,9 @@ android {
         }
     }
     productFlavors {
+    }
+    lintOptions {
+        abortOnError false
     }
 }
 

@@ -1,4 +1,4 @@
-package com.jacobwysko.teacherquotesversion3;
+package com.jacobwysko.teacherquotes;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -29,7 +29,7 @@ import java.util.Locale;
 
 public class QuoteActivity extends AppCompatActivity {
 
-    String dateFormat = "MM/dd/YYYY";
+    String dateFormat = "MM/dd/yyyy";
     SimpleDateFormat sdf = new SimpleDateFormat(dateFormat, Locale.US);
     final Calendar myCalendar = Calendar.getInstance();
     Boolean showShareButton;
@@ -68,7 +68,7 @@ public class QuoteActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
+
                 new DatePickerDialog(context, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
@@ -77,7 +77,7 @@ public class QuoteActivity extends AppCompatActivity {
 
         Spinner teacherSpinner = null;
         try {
-            BufferedReader input = null;
+            BufferedReader input;
             File file;
             String teacherList = null;
             teacherSpinner = findViewById(R.id.teacherSpinner);
@@ -91,12 +91,12 @@ public class QuoteActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            assert input != null;
-            if (input.toString().equals("")){
+            if (teacherList == null){
                 Intent myIntent = new Intent(QuoteActivity.this, ImportTeachersActivity.class);
                 QuoteActivity.this.startActivity(myIntent);
+                finish();
             }
-            String[] teachers = new String[0];
+            String[] teachers;
 
             assert teacherList != null;
             String[] splitTeachers = teacherList.split(",");
@@ -195,19 +195,7 @@ public class QuoteActivity extends AppCompatActivity {
 
         // OH YEAH BABY HERE WE GO
 
-        EditText quoteET = findViewById(R.id.quoteEditText);
-        Spinner teacherSPIN = findViewById(R.id.teacherSpinner);
-        EditText dateET = findViewById(R.id.dateEditText);
-
-        String quote, date, teacher;
-
-        quote = quoteET.getText().toString();
-        date = dateET.getText().toString();
-        teacher = teacherSPIN.getSelectedItem().toString();
-
-        String finalQuote = '"' + quote + "\" - " + teacher + ", " + date;
-
-        quoteView.setText(finalQuote);
+        quoteView.setText(makeQuote());
     }
 
     private void somethingChangedSoDisableShareButtonAndHideQuote() {
@@ -218,6 +206,28 @@ public class QuoteActivity extends AppCompatActivity {
         TextView quote = findViewById(R.id.quotePreviewTextView);
         quote.setVisibility(View.GONE);
 
+    }
+
+    public void share(View view){
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, makeQuote());
+        startActivity(Intent.createChooser(sharingIntent, "Select Discord, then #quotes."));
+    }
+
+    private String makeQuote(){
+        EditText quoteET = findViewById(R.id.quoteEditText);
+        Spinner teacherSPIN = findViewById(R.id.teacherSpinner);
+        EditText dateET = findViewById(R.id.dateEditText);
+
+        String quote, date, teacher;
+
+        quote = quoteET.getText().toString();
+        date = dateET.getText().toString();
+        teacher = teacherSPIN.getSelectedItem().toString();
+
+
+        return '"' + quote + "\" - " + teacher + ", " + date;
     }
 
 }

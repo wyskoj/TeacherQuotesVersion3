@@ -7,7 +7,7 @@
     <string name="action_done">Done</string>
     <string name="teacher_import_help">To start, enter your teachers that you may quote by entering them below.</string>
     <string name="teacher_import_hint">Enter teacher names on new lines</string>
-    <string name="teacher_guidelines">Guidelines:\n- Last name only (e.g. Smith)\n- Exclude Mr./Mrs. (exception where multiple teachers of same last name and different gender)</string>
+    <string name="teacher_guidelines">Guidelines:\n- Last name only (e.g. Smith)\n- Exclude Mr./Mrs.\n- If multiple teachers share the same last name, include their first initial (RPorritt)</string>
     <string name="sort_alphabetically">Sort alphabetically on confirm</string>
     <string name="title_activity_test_settings">Settings</string>
     <string name="quote_guidelines">- Do not add quotation marks\n- End with proper punctuation</string>
