@@ -36,11 +36,11 @@ public class ImportTeachersActivity extends AppCompatActivity {
                 String content = teacherEditText.getText().toString();
                 CheckBox sortCheckBox = findViewById(R.id.sortCheckBox);
                 sortCheckBox.isChecked();
-                if (sortCheckBox.isChecked()){
-                    String[] temp = content.split("\n");
-                    Arrays.sort(temp);
-                    content = joinWithNewLines(temp);
-                }
+
+                String[] temp = content.split("\n");
+                if (sortCheckBox.isChecked()) Arrays.sort(temp);
+                content = joinWithCommas(temp);
+
                 String filename = "teacherList";
                 FileOutputStream outputStream;
                 try {
@@ -62,12 +62,12 @@ public class ImportTeachersActivity extends AppCompatActivity {
     }
 
     @SuppressLint("Assert")
-    private String joinWithNewLines(String[] list){
+    private String joinWithCommas(String[] list){
         String builder = "";
         for (int i = 0; i < list.length; i++){
             if (i != list.length - 1){
                 builder = builder + (list[i]);
-                builder = builder + ("\n");
+                builder = builder + (",");
             } else {
                 assert false;
                 builder = builder + (list[i]);

@@ -13,8 +13,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void ohyeah(View view ){
+    public void startWelcome(View view ){
         Intent myIntent = new Intent(MainActivity.this, WelcomeActivity.class);
+        MainActivity.this.startActivity(myIntent);
+    }
+
+    public void startQuote(View view ){
+        Intent myIntent = new Intent(MainActivity.this, QuoteActivity.class);
+        MainActivity.this.startActivity(myIntent);
+    }
+
+    public void startTeachers(View view ){
+        Intent myIntent = new Intent(MainActivity.this, ImportTeachersActivity.class);
         MainActivity.this.startActivity(myIntent);
     }
 }
