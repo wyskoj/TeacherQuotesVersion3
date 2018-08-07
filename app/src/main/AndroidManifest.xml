@@ -25,8 +25,12 @@
         <activity
             android:name=".ImportTeachersActivity"
             tools:targetApi="jelly_bean" />
-        <activity   android:name=".QuoteActivity"
-                    android:parentActivityName=".MainActivity"
+        <activity
+            android:name=".QuoteActivity"
+            android:parentActivityName=".MainActivity"
+            tools:targetApi="jelly_bean" />
+        <activity android:name=".BulkQuoteActivity"
+            android:parentActivityName=".MainActivity"
             tools:targetApi="jelly_bean" />
     </application>
 

@@ -13,4 +13,7 @@
     <string name="quote_guidelines">- Do not add quotation marks\n- End with proper punctuation</string>
     <string name="preview">Preview</string>
     <string name="share">Share</string>
+    <string name="basic_quote">Basic Quote</string>
+    <string name="quoting">Quoting</string>
+    <string name="teachers">Teachers</string>
 </resources>

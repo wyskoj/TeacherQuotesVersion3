@@ -2,12 +2,10 @@ package com.jacobwysko.teacherquotes;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.view.View;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,31 +14,48 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        String version = null;
-        try {
-            PackageInfo pInfo = this.getPackageManager().getPackageInfo(getPackageName(), 0);
-            version = pInfo.versionName;
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
+
+        CardView basicQuote = findViewById(R.id.basicQuote);
+        CardView bulkQuote = findViewById(R.id.bulkQuote);
+        CardView teacherImport = findViewById(R.id.teacherImport);
+
+        basicQuote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(MainActivity.this, QuoteActivity.class);
+                MainActivity.this.startActivity(myIntent);
+            }
+        });
+        bulkQuote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(MainActivity.this, BulkQuoteActivity.class);
+                MainActivity.this.startActivity(myIntent);
+            }
+        });
+        teacherImport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(MainActivity.this, ImportTeachersActivity.class);
+                MainActivity.this.startActivity(myIntent);
+            }
+        });
+
+
+    }
+
+    public void onClick(View view){
+
+        switch (view.getId()){
+            case R.id.basicQuote :
+                new Intent(this, QuoteActivity.class);
+                break;
+            case R.id.bulkQuote :
+                new Intent(this, BulkQuoteActivity.class);
+                break;
+            case R.id.teacherImport :
+                new Intent(this, ImportTeachersActivity.class);
+                break;
         }
-
-        TextView versionText = findViewById(R.id.versionTextView);
-        versionText.setText("v" + version + " - DEVELOPMENT VERSION");
-
-    }
-
-    public void startWelcome(View view ){
-        Intent myIntent = new Intent(MainActivity.this, WelcomeActivity.class);
-        MainActivity.this.startActivity(myIntent);
-    }
-
-    public void startQuote(View view ){
-        Intent myIntent = new Intent(MainActivity.this, QuoteActivity.class);
-        MainActivity.this.startActivity(myIntent);
-    }
-
-    public void startTeachers(View view ){
-        Intent myIntent = new Intent(MainActivity.this, ImportTeachersActivity.class);
-        MainActivity.this.startActivity(myIntent);
     }
 }
