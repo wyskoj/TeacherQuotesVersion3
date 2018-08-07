@@ -2,12 +2,17 @@ package com.jacobwysko.teacherquotes;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -15,6 +20,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -26,6 +32,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.Objects;
 
 public class QuoteActivity extends AppCompatActivity {
 
@@ -158,6 +165,24 @@ public class QuoteActivity extends AppCompatActivity {
 
             }
         });
+
+        dateEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                somethingChangedSoDisableShareButtonAndHideQuote();
+                updateButtons();
+            }
+        });
     }
 
     private void updateDate() {
@@ -166,18 +191,6 @@ public class QuoteActivity extends AppCompatActivity {
     }
 
     private void updateButtons(){
-        Button preview = findViewById(R.id.previewButton);
-        if (teacherIsGood && quoteIsGood){
-            preview.setVisibility(View.VISIBLE);
-        } else {
-            preview.setVisibility(View.GONE);
-            /*
-               You see, taking shits and wiping your ass
-               on the couch is all fun and games, but once
-               you're in there and trying to hide the remains,
-               it's View.GONE, it's fucking in the springs and shit.
-            */
-        }
         Button share = findViewById(R.id.shareButton);
         if (showShareButton) {
             share.setVisibility(View.VISIBLE);
@@ -187,15 +200,86 @@ public class QuoteActivity extends AppCompatActivity {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void previewPressed(View view) {
-        showShareButton = true;
-        updateButtons();
-        TextView quoteView = findViewById(R.id.quotePreviewTextView);
-        quoteView.setVisibility(View.VISIBLE);
 
-        // OH YEAH BABY HERE WE GO
+        InputMethodManager inputManager = (InputMethodManager)
+                getSystemService(Context.INPUT_METHOD_SERVICE);
 
-        quoteView.setText(makeQuote());
+        assert inputManager != null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            inputManager.hideSoftInputFromWindow(Objects.requireNonNull(getCurrentFocus()).getWindowToken(),
+                    InputMethodManager.HIDE_NOT_ALWAYS);
+        } else try {
+            inputManager.hideSoftInputFromWindow(Objects.requireNonNull(getCurrentFocus()).getWindowToken(),
+                    InputMethodManager.HIDE_NOT_ALWAYS);
+        } catch (Exception ignored) {
+        }
+
+
+        EditText quoteET = findViewById(R.id.quoteEditText);
+        Spinner teacherSPIN = findViewById(R.id.teacherSpinner);
+        EditText dateET = findViewById(R.id.dateEditText);
+
+        String quote, date, teacher;
+
+        quote = quoteET.getText().toString();
+        date = dateET.getText().toString();
+        teacher = teacherSPIN.getSelectedItem().toString();
+
+        Context context = getApplicationContext();
+        int duration = Toast.LENGTH_SHORT;
+
+        // QUICK FAIL
+        if ("".equals(quote.trim())) { //If the quote field is empty
+            Toast.makeText(context, "Quote field is empty!", duration).show();
+        } else if ("".equals(date.trim())) { //If the date field is empty (wtf how did you do that?!)
+            Toast.makeText(context, "Date field is empty!", duration).show();
+        } else if ("Choose a teacher...".equals(teacher.trim())){
+            Toast.makeText(context, "Select a teacher!", duration).show();
+        } else { // You made it! Almost maybe.
+
+            //WARNINGS
+
+            if (quote.contains("\"")) { // If there's any "s in the quote editText
+                quoteET.setText(quote.replace("\"", ""));
+                quote = quote.replace("\"", "");
+                AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+                dialog.setTitle("Quote contains quotation marks");
+                dialog.setMessage("Quotations are not required; they are added automatically.");
+                dialog.setNeutralButton("Okay", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                AlertDialog alert = dialog.create();
+                alert.show();
+            }
+            if (!quote.substring(quote.length() - 1).matches("[.?!)\\]]")) { // If the last char is a . ! ? ] )
+                quoteET.setText(quote.replace("\"", ""));
+                AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+                dialog.setTitle("Quote contains no ending punctuation");
+                dialog.setMessage("The last character is not a punctuation mark. You may continue or add punctuation.");
+                dialog.setNeutralButton("Okay", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                AlertDialog alert = dialog.create();
+                alert.show();
+            }
+
+            showShareButton = true;
+            updateButtons();
+            TextView quoteView = findViewById(R.id.quotePreviewTextView);
+            quoteView.setVisibility(View.VISIBLE);
+
+            // OH YEAH BABY HERE WE GO
+
+            quoteView.setText(makeQuote());
+        }
     }
 
     private void somethingChangedSoDisableShareButtonAndHideQuote() {
@@ -229,5 +313,6 @@ public class QuoteActivity extends AppCompatActivity {
 
         return '"' + quote + "\" - " + teacher + ", " + date;
     }
+
 
 }

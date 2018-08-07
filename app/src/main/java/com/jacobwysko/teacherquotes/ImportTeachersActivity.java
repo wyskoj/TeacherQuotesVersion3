@@ -27,7 +27,7 @@ public class ImportTeachersActivity extends AppCompatActivity {
 
         BufferedReader input;
         File file;
-        String teacherList = null;
+        String teacherList;
                    try {
                 file = new File(getFilesDir(), "teacherList");
                 input = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
@@ -97,17 +97,17 @@ public class ImportTeachersActivity extends AppCompatActivity {
 
     @SuppressLint("Assert")
     private String joinWithCommas(String[] list){
-        String builder = "";
+        StringBuilder builder = new StringBuilder();
         for (int i = 0; i < list.length; i++){
             if (i != list.length - 1){
-                builder = builder + (list[i]);
-                builder = builder + (",");
+                builder.append(list[i]);
+                builder.append(",");
             } else {
                 assert false;
-                builder = builder + (list[i]);
+                builder.append(list[i]);
             }
 
         }
-        return builder;
+        return builder.toString();
     }
 }
