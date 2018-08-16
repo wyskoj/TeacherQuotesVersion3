@@ -8,4 +8,4 @@
 
 ## Supported Platforms
 - Android 4.0.3 or higher
-- HTML5 (http://jacobwysko.com/teacherquotes)
+- HTML5 (http://teacherquot.es)
