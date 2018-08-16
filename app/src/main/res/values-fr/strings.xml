@@ -10,4 +10,11 @@
     <string name="teacher_import_hint">Entrez les noms des professeurs sur les nouvelles lignes</string>
     <string name="sort_alphabetically">Trier par ordre alphabétique lorsqu\'il est confirmé</string>
     <string name="teacher_guidelines">Directives:\n- Nom de famille seulement (par exemple Smith)\n- Exclure M. / Mme. (exception où plusieurs professeurs du même nom et du même genre)</string>
+    <string name="quote_guidelines">- N\'ajoutez pas de guillemets - Terminez par une ponctuation correcte</string>
+    <string name="basic_quote">Citation de Base</string>
+    <string name="preview">Aperçu</string>
+    <string name="share">Partager</string>
+    <string name="quoting">Citant</string>
+    <string name="quote">Citation</string>
+    <string name="settings">Paramètres</string>
 </resources>
