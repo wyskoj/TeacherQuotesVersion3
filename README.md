@@ -6,6 +6,5 @@
 - Basic Quoting Screen
 - TBD
 
-## Supported Platforms
+## Supported Platform
 - Android 4.0.3 or higher
-- HTML5 (http://teacherquot.es)
