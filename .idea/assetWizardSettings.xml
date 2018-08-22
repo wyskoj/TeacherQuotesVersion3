@@ -35,7 +35,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="scalingPercent" value="71" />
+                                                <entry key="scalingPercent" value="112" />
                                                 <entry key="trimmed" value="true" />
                                               </map>
                                             </option>
@@ -46,8 +46,8 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="backgroundAssetType" value="COLOR" />
                                       <entry key="backgroundColor" value="ffffff" />
+                                      <entry key="backgroundImage" value="C:\Program Files\Android\Android Studio1\plugins\android\lib\templates\gradle-projects\NewAndroidModule\root\res\ic_launcher-web.png" />
                                       <entry key="foregroundImage" value="D:\Andriod_Apps\TeacherQuotesVersion3\TeacherQuotesVersion3\app\src\main\res\drawable\tq_logo.png" />
                                       <entry key="showSafeZone" value="false" />
                                     </map>

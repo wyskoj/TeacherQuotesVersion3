@@ -207,15 +207,16 @@ public class QuoteActivity extends AppCompatActivity {
                 getSystemService(Context.INPUT_METHOD_SERVICE);
 
         assert inputManager != null;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            inputManager.hideSoftInputFromWindow(Objects.requireNonNull(getCurrentFocus()).getWindowToken(),
-                    InputMethodManager.HIDE_NOT_ALWAYS);
-        } else try {
-            inputManager.hideSoftInputFromWindow(Objects.requireNonNull(getCurrentFocus()).getWindowToken(),
-                    InputMethodManager.HIDE_NOT_ALWAYS);
-        } catch (Exception ignored) {
-        }
-
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                inputManager.hideSoftInputFromWindow(Objects.requireNonNull(getCurrentFocus()).getWindowToken(),
+                        InputMethodManager.HIDE_NOT_ALWAYS);
+            } else try {
+                inputManager.hideSoftInputFromWindow(Objects.requireNonNull(getCurrentFocus()).getWindowToken(),
+                        InputMethodManager.HIDE_NOT_ALWAYS);
+            } catch (Exception ignored) {
+            }
+        } catch (Exception ignored){}
 
         EditText quoteET = findViewById(R.id.quoteEditText);
         Spinner teacherSPIN = findViewById(R.id.teacherSpinner);
@@ -223,7 +224,7 @@ public class QuoteActivity extends AppCompatActivity {
 
         String quote, date, teacher;
 
-        quote = quoteET.getText().toString();
+        quote = quoteET.getText().toString().trim();
         date = dateET.getText().toString();
         teacher = teacherSPIN.getSelectedItem().toString();
 
@@ -256,7 +257,7 @@ public class QuoteActivity extends AppCompatActivity {
                 AlertDialog alert = dialog.create();
                 alert.show();
             }
-            if (!quote.substring(quote.length() - 1).matches("[.?!)\\]]")) { // If the last char is a . ! ? ] )
+            if (!quote.trim().substring(quote.length() - 1).matches("[.?!)\\]]")) { // If the last char is a . ! ? ] )
                 quoteET.setText(quote.replace("\"", ""));
                 AlertDialog.Builder dialog = new AlertDialog.Builder(this);
                 dialog.setTitle("Quote contains no ending punctuation");
@@ -306,7 +307,7 @@ public class QuoteActivity extends AppCompatActivity {
 
         String quote, date, teacher;
 
-        quote = quoteET.getText().toString();
+        quote = quoteET.getText().toString().trim();
         date = dateET.getText().toString();
         teacher = teacherSPIN.getSelectedItem().toString();
 

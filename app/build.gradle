@@ -6,10 +6,10 @@ android {
         applicationId "com.jacobwysko.teacherquotes"
         minSdkVersion 15
         targetSdkVersion 27
-        versionName '3.0.1.1a'
+        versionName '3.0.1.2a'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
-        versionCode 24
+        versionCode 25
     }
     buildTypes {
         release {
